@@ -187,7 +187,7 @@ export default function About() {
                 </div>
                 <div className="mt-3 flex flex-col gap-1">
                   <a href="mailto:hello@law4teen.org" className="flex items-center gap-1.5 text-muted-foreground hover:text-navy-dark text-xs font-play transition-colors">
-                    <Mail className="w-3.5 h-3.5" /> hello@law4teen.org
+                    <Mail className="w-3.5 h-3.5" /> ellatowle3@gmail.com
                   </a>
                   <a href="https://law4teen.org" className="flex items-center gap-1.5 text-muted-foreground hover:text-navy-dark text-xs font-play transition-colors">
                     <Globe className="w-3.5 h-3.5" /> law4teen.org
