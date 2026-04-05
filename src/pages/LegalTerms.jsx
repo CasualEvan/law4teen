@@ -3,38 +3,6 @@ import { Search, BookOpen, Volume2, ChevronDown, ChevronUp, Loader2 } from "luci
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/lib/supabase";
 
-export default function LegalTerms() {
-  const [terms, setTerms] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  useEffect(() => {
-    supabase
-      .from("legal_terms")
-      .select("*")
-      .order("term", { ascending: true })
-      .then(({ data }) => {
-        setTerms(data || []);
-        setLoading(false);
-      });
-  }, []);
-
-  const categories = ["All", ...Array.from(new Set(terms.map((t) => t.category))).sort()];
-
-  const filtered = terms.filter((t) => {
-    const matchSearch = t.term.toLowerCase().includes(search.toLowerCase()) || t.definition.toLowerCase().includes(search.toLowerCase());
-    const matchCat = activeCategory === "All" || t.category === activeCategory;
-    return matchSearch && matchCat;
-  });
-
-  if (loading) return (
-    <div className="flex items-center justify-center py-40">
-      <Loader2 className="w-6 h-6 animate-spin text-navy-dark" />
-    </div>
-  );
-
-
 function TermCard({ term }) {
   const [open, setOpen] = useState(false);
 
@@ -82,14 +50,35 @@ function TermCard({ term }) {
 }
 
 export default function LegalTerms() {
+  const [terms, setTerms] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+
+  useEffect(() => {
+    supabase
+      .from("legal_terms")
+      .select("*")
+      .order("term", { ascending: true })
+      .then(({ data }) => {
+        setTerms(data || []);
+        setLoading(false);
+      });
+  }, []);
+
+  const categories = ["All", ...Array.from(new Set(terms.map((t) => t.category))).sort()];
 
   const filtered = terms.filter((t) => {
     const matchSearch = t.term.toLowerCase().includes(search.toLowerCase()) || t.definition.toLowerCase().includes(search.toLowerCase());
     const matchCat = activeCategory === "All" || t.category === activeCategory;
     return matchSearch && matchCat;
   });
+
+  if (loading) return (
+    <div className="flex items-center justify-center py-40">
+      <Loader2 className="w-6 h-6 animate-spin text-navy-dark" />
+    </div>
+  );
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -101,7 +90,6 @@ export default function LegalTerms() {
         <p className="mt-2 text-muted-foreground font-play">Plain-English definitions of legal terms — click any term to expand, or hit the speaker icon to hear it</p>
       </div>
 
-      {/* Search */}
       <div className="relative mb-6">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
         <Input
@@ -112,7 +100,6 @@ export default function LegalTerms() {
         />
       </div>
 
-      {/* Category filter */}
       <div className="flex flex-wrap gap-2 mb-8">
         {categories.map((cat) => (
           <button
