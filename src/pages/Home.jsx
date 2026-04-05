@@ -54,17 +54,18 @@ export default function Home() {
       {/* Hero */}
       <section className="relative bg-navy-dark overflow-hidden">
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-0 w-full h-full"
+          <div
+            className="absolute top-0 left-0 w-full h-full"
             style={{ backgroundImage: "repeating-linear-gradient(45deg, #f0c040 0, #f0c040 1px, transparent 0, transparent 50%)", backgroundSize: "20px 20px" }}
           />
         </div>
         <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-gold/5 blur-3xl" />
         <div className="absolute bottom-0 left-10 w-96 h-96 rounded-full bg-navy-light/20 blur-3xl" />
 
-        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36 text-center">
           <h1 className="font-display text-5xl md:text-7xl font-bold text-white leading-tight">
             Law Made{" "}
-            <span className="font-display text-5xl md:text-7xl font-bold text-white leading-tight">
+            <span className="text-gold relative">
               Simple
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gold/40" />
             </span>{" "}
@@ -89,6 +90,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
 
       {/* Features grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
