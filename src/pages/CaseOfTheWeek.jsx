@@ -95,7 +95,7 @@ export default function CaseOfTheWeek() {
               <Scale className="w-4 h-4" /> {c.court} · {c.year}
             </p>
           </div>
-          <div className="flex flex-col items-end gap-2">
+          <div className="flex flex-col items-start gap-2">
             <span className="font-play text-xs text-gold-light/50">Ruling</span>
             <span className="font-display text-gold font-bold">{c.outcome}</span>
           </div>
