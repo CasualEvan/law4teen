@@ -1,35 +1,39 @@
-import React, { useState } from "react";
-import { Search, BookOpen, Volume2, ChevronDown, ChevronUp } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Search, BookOpen, Volume2, ChevronDown, ChevronUp, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { supabase } from "@/lib/supabase";
 
-const terms = [
-  { term: "Affidavit", category: "Evidence", definition: "A written statement confirmed by oath or affirmation, used as evidence in court proceedings.", example: "A witness who cannot appear in court may submit an affidavit describing what they saw." },
-  { term: "Acquittal", category: "Criminal Law", definition: "A judgment that a person is not guilty of the crime charged.", example: "After reviewing all evidence, the jury returned an acquittal for the defendant." },
-  { term: "Amicus Curiae", category: "Court Procedure", definition: "Latin for 'friend of the court' — a person or organization not party to a case who offers information or expertise.", example: "The ACLU filed an amicus curiae brief in the civil rights case." },
-  { term: "Appeal", category: "Court Procedure", definition: "A request to a higher court to review and change the decision of a lower court.", example: "After losing the trial, the defendant filed an appeal to the Circuit Court." },
-  { term: "Arraignment", category: "Criminal Law", definition: "A court proceeding in which a defendant is formally charged and asked to plead guilty or not guilty.", example: "At the arraignment, the defendant pleaded not guilty to all three charges." },
-  { term: "Brief", category: "Court Procedure", definition: "A written legal document presented to a court arguing why one side should win.", example: "The attorney spent weeks writing her brief outlining why the law was unconstitutional." },
-  { term: "Burden of Proof", category: "Evidence", definition: "The obligation of a party to prove their claims to the required legal standard.", example: "In criminal cases, the prosecution bears the burden of proof beyond a reasonable doubt." },
-  { term: "Class Action", category: "Civil Law", definition: "A lawsuit where a large group of people collectively bring a claim against a defendant.", example: "Consumers filed a class action lawsuit against the company for selling defective products." },
-  { term: "Due Process", category: "Constitutional Law", definition: "The legal requirement that the government must respect all legal rights owed to a person.", example: "The defendant claimed his due process rights were violated when he wasn't allowed an attorney." },
-  { term: "Eminent Domain", category: "Property Law", definition: "The government's power to take private property for public use, with fair compensation.", example: "The city used eminent domain to acquire land for building a new highway." },
-  { term: "Habeas Corpus", category: "Constitutional Law", definition: "A legal action requiring a person under arrest to be brought before a judge or court.", example: "The prisoner filed a habeas corpus petition challenging the legality of his detention." },
-  { term: "Injunction", category: "Civil Law", definition: "A court order requiring a party to do or stop doing a specific action.", example: "The court issued an injunction preventing the company from dumping chemicals in the river." },
-  { term: "Jurisdiction", category: "Court Procedure", definition: "The authority of a court to hear and decide a case.", example: "The federal court lacked jurisdiction because it was a state matter." },
-  { term: "Libel", category: "Tort Law", definition: "A published false statement that damages a person's reputation.", example: "The celebrity sued the magazine for libel after they published false rumors about her." },
-  { term: "Litigation", category: "Court Procedure", definition: "The process of taking legal action; being involved in a lawsuit.", example: "After failed negotiations, the dispute went into litigation." },
-  { term: "Moot", category: "Court Procedure", definition: "A case or issue that is no longer relevant or has been resolved outside of court.", example: "The case became moot when the law was repealed before the court could rule on it." },
-  { term: "Negligence", category: "Tort Law", definition: "Failure to exercise the care a reasonable person would take, resulting in harm to another.", example: "The driver was found negligent for texting while driving, causing an accident." },
-  { term: "Plaintiff", category: "Court Procedure", definition: "The person who brings a case against another in a court of law.", example: "The plaintiff sued the landlord for failing to fix the broken heater." },
-  { term: "Precedent", category: "Constitutional Law", definition: "A legal decision that serves as a rule for future similar cases (also called 'stare decisis').", example: "Brown v. Board of Education set a precedent for desegregating public schools." },
-  { term: "Subpoena", category: "Court Procedure", definition: "A legal document ordering someone to appear in court or produce documents.", example: "The witness received a subpoena requiring her to testify at the trial." },
-  { term: "Tort", category: "Tort Law", definition: "A wrongful act or infringement of rights leading to civil legal liability.", example: "Slipping on a wet floor in a store with no warning sign could be considered a tort." },
-  { term: "Verdict", category: "Court Procedure", definition: "The formal decision made by a jury after a trial.", example: "After two days of deliberation, the jury announced a guilty verdict." },
-  { term: "Voir Dire", category: "Court Procedure", definition: "The process of questioning potential jurors before a trial to select an impartial jury.", example: "During voir dire, both attorneys questioned 50 potential jurors." },
-  { term: "Writ", category: "Court Procedure", definition: "A formal written order issued by a court or other legal authority.", example: "The Supreme Court issued a writ of certiorari to hear the appeal." },
-];
+export default function LegalTerms() {
+  const [terms, setTerms] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
 
-const categories = ["All", ...Array.from(new Set(terms.map((t) => t.category))).sort()];
+  useEffect(() => {
+    supabase
+      .from("legal_terms")
+      .select("*")
+      .order("term", { ascending: true })
+      .then(({ data }) => {
+        setTerms(data || []);
+        setLoading(false);
+      });
+  }, []);
+
+  const categories = ["All", ...Array.from(new Set(terms.map((t) => t.category))).sort()];
+
+  const filtered = terms.filter((t) => {
+    const matchSearch = t.term.toLowerCase().includes(search.toLowerCase()) || t.definition.toLowerCase().includes(search.toLowerCase());
+    const matchCat = activeCategory === "All" || t.category === activeCategory;
+    return matchSearch && matchCat;
+  });
+
+  if (loading) return (
+    <div className="flex items-center justify-center py-40">
+      <Loader2 className="w-6 h-6 animate-spin text-navy-dark" />
+    </div>
+  );
+
 
 function TermCard({ term }) {
   const [open, setOpen] = useState(false);
