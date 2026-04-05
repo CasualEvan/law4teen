@@ -11,7 +11,7 @@ export default function Footer() {
             <span className="font-display text-lg font-bold text-gold">Law4Teen.org</span>
           </div>
           <p className="text-gold-light/50 text-sm font-play flex items-center gap-1">
-            Made with <Heart className="w-3.5 h-3.5 text-gold fill-gold" /> for the next generation of legal minds
+            
           </p>
           <p className="text-gold-light/40 text-xs font-play">
             &copy; {new Date().getFullYear()} Law4Teen. All rights reserved.
