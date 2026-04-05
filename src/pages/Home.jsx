@@ -61,21 +61,17 @@ export default function Home() {
         <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-gold/5 blur-3xl" />
         <div className="absolute bottom-0 left-10 w-96 h-96 rounded-full bg-navy-light/20 blur-3xl" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36 text-center">
-          <div className="inline-flex items-center gap-2 bg-gold/10 border border-gold/20 rounded-full px-4 py-1.5 mb-6">
-            <Star className="w-3.5 h-3.5 text-gold fill-gold" />
-            <span className="text-gold text-sm font-play font-medium">Your legal education starts here</span>
-          </div>
+        
           <h1 className="font-display text-5xl md:text-7xl font-bold text-white leading-tight">
             Law Made{" "}
-            <span className="text-gold relative">
+            <span className="font-display text-5xl md:text-7xl font-bold text-white leading-tight">
               Simple
               <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gold/40" />
             </span>{" "}
             for Teens
           </h1>
           <p className="mt-6 text-gold-light/70 text-lg md:text-xl max-w-2xl mx-auto font-play leading-relaxed">
-            Explore landmark cases, master legal vocabulary, practice LSAT questions, and understand your constitutional rights — all in one place.
+            Explore landmark cases, master legal vocabulary, practice LSAT questions, and understand your constitutional rights.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
