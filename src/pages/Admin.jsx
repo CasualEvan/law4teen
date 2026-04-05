@@ -221,7 +221,7 @@ function CasesTab() {
 
 // ─── TERMS TAB ────────────────────────────────────────────────────────────────
 
-const CATEGORIES = ["Constitutional Law", "Criminal Law", "Civil Law", "Court Procedure", "Evidence", "Tort Law", "Property Law"];
+const CATEGORIES = ["Constitutional Law", "Criminal Law", "Civil Law", "Court Procedure", "Evidence", "Tort Law", "Property Law", "Government", "Legal Profession", "Crimes", "Defenses & Damages", "Punishments"];
 
 function TermsTab() {
   const [terms, setTerms] = useState([]);
