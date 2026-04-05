@@ -231,7 +231,6 @@ export default function Admin() {
 
   const tabs = [
     { id: "cases", label: "Cases", icon: Scale },
-    { id: "headlines", label: "Headlines", icon: Newspaper },
     { id: "about", label: "About Me", icon: User },
   ];
 
@@ -264,7 +263,6 @@ export default function Admin() {
           {tabs.find(t => t.id === tab)?.label}
         </h1>
         {tab === "cases" && <CasesTab />}
-        {tab === "headlines" && <HeadlinesTab />}
         {tab === "about" && <AboutTab />}
       </div>
     </div>
