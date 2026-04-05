@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { isAdminLoggedIn, logoutAdmin } from "@/lib/adminAuth";
 import { LogOut, Newspaper, Plus, Trash2, Save, CheckCircle, ChevronDown, ChevronUp, Loader2, Scale, Upload, X, ToggleLeft, ToggleRight, User } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { LogOut, Plus, Trash2, Save, CheckCircle, ChevronDown, ChevronUp, Loader2, Scale, Upload, X, ToggleLeft, ToggleRight, User, BookOpen } from "lucide-react";
 
 // ─── ABOUT TAB ────────────────────────────────────────────────────────────────
 
@@ -357,6 +358,7 @@ export default function Admin() {
 
   const tabs = [
     { id: "cases", label: "Cases", icon: Scale },
+    { id: "terms", label: "Legal Terms", icon: BookOpen },
     { id: "about", label: "About Me", icon: User },
   ];
 
@@ -389,6 +391,7 @@ export default function Admin() {
           {tabs.find(t => t.id === tab)?.label}
         </h1>
         {tab === "cases" && <CasesTab />}
+        {tab === "terms" && <TermsTab />}
         {tab === "about" && <AboutTab />}
       </div>
     </div>
