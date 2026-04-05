@@ -190,6 +190,12 @@ function HeadlineCard({ h, formatTime, speakHeadline }) {
         <div className="flex-1">
           <h2 className="font-display text-lg font-bold text-navy-dark mb-2">{h.title}</h2>
           <p className="text-sm text-muted-foreground">{h.summary}</p>
+          {formatTime(h) && (
+            <p className="mt-2 text-xs text-muted-foreground font-play flex items-center gap-1">
+              <Clock className="w-3 h-3" />
+              {formatTime(h)}
+            </p>
+          )}
         </div>
 
         <button onClick={() => speakHeadline(h)}>
