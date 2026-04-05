@@ -108,24 +108,38 @@ function CasesTab() {
     fetchCases();
   };
 
-  const handleAudioUpload = async (caseId, file) => {
-    setUploading(caseId);
-    const ext = file.name.split(".").pop();
-    const path = `${caseId}-${Date.now()}.${ext}`;
-    const { error } = await supabase.storage.from("case-audio").upload(path, file, { upsert: true });
-    if (!error) {
-      const { data: urlData } = supabase.storage.from("case-audio").getPublicUrl(path);
-      await supabase.from("cases").update({ audio_url: urlData.publicUrl }).eq("id", caseId);
-      fetchCases();
-    }
-    setUploading(false);
-  };
-
   const handleRemoveAudio = async (caseId) => {
-    await supabase.from("cases").update({ audio_url: null }).eq("id", caseId);
-    fetchCases();
-  };
+  // Get the current audio_url first so we can delete the file
+  const c = cases.find(c => c.id === caseId);
+  if (c?.audio_url) {
+    // Extract the file path from the public URL
+    const path = c.audio_url.split("/case-audio/")[1];
+    if (path) await supabase.storage.from("case-audio").remove([path]);
+  }
+  await supabase.from("cases").update({ audio_url: null }).eq("id", caseId);
+  fetchCases();
+};
 
+const handleAudioUpload = async (caseId, file) => {
+  setUploading(caseId);
+
+  // Delete old file if one exists
+  const c = cases.find(c => c.id === caseId);
+  if (c?.audio_url) {
+    const oldPath = c.audio_url.split("/case-audio/")[1];
+    if (oldPath) await supabase.storage.from("case-audio").remove([oldPath]);
+  }
+
+  const ext = file.name.split(".").pop();
+  const path = `${caseId}-${Date.now()}.${ext}`;
+  const { error } = await supabase.storage.from("case-audio").upload(path, file, { upsert: true });
+  if (!error) {
+    const { data: urlData } = supabase.storage.from("case-audio").getPublicUrl(path);
+    await supabase.from("cases").update({ audio_url: urlData.publicUrl }).eq("id", caseId);
+    fetchCases();
+  }
+  setUploading(false);
+};
   const handleAddCase = async () => {
     const blank = {
       title: "New Case", year: new Date().getFullYear().toString(), court: "U.S. Supreme Court",
