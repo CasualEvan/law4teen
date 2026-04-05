@@ -15,7 +15,6 @@ const defaultCase = {
   ruling: "Chief Justice Earl Warren delivered the unanimous opinion, stating: 'We conclude that in the field of public education, the doctrine of separate but equal has no place. Separate educational facilities are inherently unequal.' The Court held that segregation violated the Equal Protection Clause of the 14th Amendment.",
   impact: "This decision fundamentally changed American society. It desegregated public schools, inspired the Civil Rights Act of 1964, and demonstrated the power of the courts to protect individual rights. Thurgood Marshall later became the first Black Supreme Court Justice.",
   key_terms: ["Equal Protection Clause", "14th Amendment", "Unconstitutional", "Segregation", "Precedent"],
-  voice_text: "Brown versus Board of Education, decided in 1954, is one of the most important Supreme Court cases in American history. The Court unanimously ruled that racial segregation in public schools violated the Equal Protection Clause of the 14th Amendment.",
   audio_url: null,
   week_date: "March 28, 2026",
 };
@@ -101,29 +100,6 @@ export default function CaseOfTheWeek() {
             <span className="font-display text-gold font-bold">{c.outcome}</span>
           </div>
         </div>
-
-        {/* TTS Voice player */}
-        <div className="mt-8 bg-navy-light/30 border border-gold/10 rounded-xl p-4 flex items-center gap-4">
-          <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center flex-shrink-0">
-            <Volume2 className="w-5 h-5 text-navy-dark" />
-          </div>
-          <div className="flex-1">
-            <p className="font-play text-sm text-gold-light/80">Voice Summary</p>
-            <p className="font-play text-xs text-gold-light/40">AI-generated text-to-speech overview</p>
-          </div>
-          <Button
-            onClick={speaking ? stopSpeech : startSpeech}
-            className={`flex items-center gap-2 font-play font-medium px-5 py-2 rounded-lg transition-colors ${
-              speaking
-                ? "bg-red-500/20 text-red-300 border border-red-400/30 hover:bg-red-500/30"
-                : "bg-gold text-navy-dark hover:bg-gold-light"
-            }`}
-          >
-            {speaking ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-            {speaking ? "Stop" : "Listen"}
-          </Button>
-        </div>
-
         {/* Uploaded audio player */}
         {c.audio_url && (
           <div className="mt-4 bg-navy-light/30 border border-gold/10 rounded-xl p-4 flex items-center gap-4">
@@ -132,7 +108,7 @@ export default function CaseOfTheWeek() {
             </div>
             <div className="flex-1">
               <p className="font-play text-sm text-gold-light/80">In-Depth Audio Explanation</p>
-              <p className="font-play text-xs text-gold-light/40">Uploaded by admin</p>
+              <p className="font-play text-xs text-gold-light/40">Audio on the go</p>
             </div>
             <audio
               ref={audioRef}
