@@ -64,12 +64,7 @@ export default function Home() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36 text-center">
           <h1 className="font-display text-5xl md:text-7xl font-bold text-white leading-tight">
-            Law Made{" "}
-            <span className="text-gold relative">
-              Simple
-              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gold/40" />
-            </span>{" "}
-            for Teens
+            Law Made Simple for Teens
           </h1>
           <p className="mt-6 text-gold-light/70 text-lg md:text-xl max-w-2xl mx-auto font-play leading-relaxed">
             Explore landmark cases, master legal vocabulary, practice LSAT questions, and understand your constitutional rights.
