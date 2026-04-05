@@ -1,4 +1,4 @@
-limport React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Scale, Heart, BookOpen, Star, Mail, Globe, Award, Users, Target, Brain, FileText, Lock, X, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { SECRET_SEQUENCE, ADMIN_USERNAME, ADMIN_PASSWORD, loginAdmin } from "@/lib/adminAuth";
