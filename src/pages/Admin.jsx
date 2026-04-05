@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { isAdminLoggedIn, logoutAdmin } from "@/lib/adminAuth";
-import { LogOut, Newspaper, Plus, Trash2, Save, CheckCircle, ChevronDown, ChevronUp, Loader2, Scale, Upload, X, ToggleLeft, ToggleRight, User } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { LogOut, Plus, Trash2, Save, CheckCircle, ChevronDown, ChevronUp, Loader2, Scale, Upload, X, ToggleLeft, ToggleRight, User, BookOpen } from "lucide-react";
 
