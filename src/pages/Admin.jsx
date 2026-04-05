@@ -172,7 +172,7 @@ function CasesTab() {
                     </div>
                   ))}
                 </div>
-                {[["Summary","summary"],["Background","background"],["The Ruling","ruling"],["Impact & Legacy","impact"],["Voice Text (read aloud)","voice_text"]].map(([label, field]) => (
+                {[["Summary","summary"],["Background","background"],["The Ruling","ruling"],["Impact & Legacy","impact"]].map(([label, field]) => (
                   <div key={field}>
                     <label className="font-play text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1 block">{label}</label>
                     <textarea value={c[field] || ""} onChange={e => handleChange(c.id, field, e.target.value)} rows={field === "voice_text" ? 2 : 4} className="w-full border border-border rounded-lg px-3 py-2 font-play text-sm focus:outline-none focus:ring-2 focus:ring-navy-dark resize-none" />
