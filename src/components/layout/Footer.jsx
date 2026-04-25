@@ -1,7 +1,30 @@
-import React from "react";
-import { Scale, Heart } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Scale } from "lucide-react";
 
 export default function Footer() {
+  const [globalVisits, setGlobalVisits] = useState(0);
+
+  useEffect(() => {
+    // 1. Your unique ID (can be anything, like 'law4teen_main_site')
+    const counterId = "law4teen_global_counter";
+    
+    // 2. Replace 'YOUR_API_KEY' with the key from your API-Ninjas dashboard
+    const apiKey = "GX8xdjbZ0VbqjUBNFU2t5d3yHN3w6aHZApLX5apI"; 
+
+    fetch(`https://api.api-ninjas.com/v1/counter?id=${counterId}&hit=true`, {
+      method: 'GET',
+      headers: {
+        'X-Api-Key': apiKey,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setGlobalVisits(data.count);
+      })
+      .catch((err) => console.error("Counter error:", err));
+  }, []);
+
   return (
     <footer className="bg-navy-dark border-t border-navy-light/20 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,9 +33,11 @@ export default function Footer() {
             <Scale className="w-5 h-5 text-gold" />
             <span className="font-display text-lg font-bold text-gold">Law4Teen.org</span>
           </div>
-          <p className="text-gold-light/50 text-sm font-play flex items-center gap-1">
-            
+
+          <p className="text-gold-light/50 text-sm font-play">
+            Global Visitors: <span className="text-gold font-bold">{globalVisits.toLocaleString()}</span>
           </p>
+
           <p className="text-gold-light/40 text-xs font-play">
             &copy; {new Date().getFullYear()} Law4Teen. All rights reserved.
           </p>
