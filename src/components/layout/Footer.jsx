@@ -6,7 +6,7 @@ export default function Footer() {
 
   useEffect(() => {
     // We fetch from our own internal function path
-    fetch("/get-count")
+    fetch("/api/get-count")
       .then((res) => res.json())
       .then((data) => {
         if (data && data.count) setGlobalVisits(data.count);
