@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Scale } from "lucide-react";
 
 export default function Footer() {
-  const [globalVisits, setGlobalVisits] = useState(null); // Start as null to handle loading
+  const [globalVisits, setGlobalVisits] = useState(null);
 
   useEffect(() => {
-    // We fetch from our own internal function path
+    // We fetch from the internal path we just created
     fetch("/api/get-count")
       .then((res) => res.json())
       .then((data) => {
-        if (data && data.count) setGlobalVisits(data.count);
+        if (data && data.count) {
+          setGlobalVisits(data.count);
+        }
       })
-      .catch((err) => console.error("Counter blocked or failed:", err));
+      .catch((err) => console.error("Counter Error:", err));
   }, []);
 
   return (
@@ -24,11 +26,10 @@ export default function Footer() {
           </div>
 
           <p className="text-gold-light/50 text-sm font-play">
-            {/* Only show the number if it loaded successfully */}
             {globalVisits !== null ? (
-              <>Total Visits: <span className="text-gold font-bold">{globalVisits.toLocaleString()}</span></>
+              <>Global Visitors: <span className="text-gold font-bold">{globalVisits.toLocaleString()}</span></>
             ) : (
-              "Welcome to Law4Teen"
+              "Empowering teens through legal literacy"
             )}
           </p>
 
