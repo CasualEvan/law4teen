@@ -1,6 +1,6 @@
 // functions/get-count.js
 export async function onRequest(context) {
-  const API_KEY = "YOUR_API_KEY_HERE"; // Paste your Ninja key here
+  const API_KEY = "GX8xdjbZ0VbqjUBNFU2t5d3yHN3w6aHZApLX5apI"; 
   const ID = "law4teen_global_counter";
 
   try {
