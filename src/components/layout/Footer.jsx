@@ -2,27 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Scale } from "lucide-react";
 
 export default function Footer() {
-  const [globalVisits, setGlobalVisits] = useState(0);
+  const [globalVisits, setGlobalVisits] = useState(null); // Start as null to handle loading
 
   useEffect(() => {
-    // 1. Your unique ID (can be anything, like 'law4teen_main_site')
-    const counterId = "law4teen_global_counter";
-    
-    // 2. Replace 'YOUR_API_KEY' with the key from your API-Ninjas dashboard
-    const apiKey = "GX8xdjbZ0VbqjUBNFU2t5d3yHN3w6aHZApLX5apI"; 
-
-    fetch(`https://api.api-ninjas.com/v1/counter?id=${counterId}&hit=true`, {
-      method: 'GET',
-      headers: {
-        'X-Api-Key': apiKey,
-        'Content-Type': 'application/json'
-      }
-    })
+    // We fetch from our own internal function path
+    fetch("/get-count")
       .then((res) => res.json())
       .then((data) => {
-        setGlobalVisits(data.count);
+        if (data && data.count) setGlobalVisits(data.count);
       })
-      .catch((err) => console.error("Counter error:", err));
+      .catch((err) => console.error("Counter blocked or failed:", err));
   }, []);
 
   return (
@@ -35,7 +24,12 @@ export default function Footer() {
           </div>
 
           <p className="text-gold-light/50 text-sm font-play">
-            Global Visitors: <span className="text-gold font-bold">{globalVisits.toLocaleString()}</span>
+            {/* Only show the number if it loaded successfully */}
+            {globalVisits !== null ? (
+              <>Total Visits: <span className="text-gold font-bold">{globalVisits.toLocaleString()}</span></>
+            ) : (
+              "Welcome to Law4Teen"
+            )}
           </p>
 
           <p className="text-gold-light/40 text-xs font-play">
