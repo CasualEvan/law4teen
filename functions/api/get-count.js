@@ -1,7 +1,7 @@
 // functions/get-count.js
 export async function onRequest(context) {
   const API_KEY = "GX8xdjbZ0VbqjUBNFU2t5d3yHN3w6aHZApLX5apI"; 
-  const ID = "law4teen_global_counter";
+  const ID = "l4t_global";
 
   try {
     const response = await fetch(`https://api.api-ninjas.com/v1/counter?id=${ID}&hit=true`, {
