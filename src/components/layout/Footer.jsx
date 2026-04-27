@@ -35,7 +35,8 @@ export default function Footer() {
 
           <p className="text-gold-light/40 text-xs font-play">
             &copy; {new Date().getFullYear()} Law4Teen. All rights reserved.
-            This site is for educational purposes, we are not held reliable for any outcome.
+            <br></br>
+            <p className="text-gold-light/40 text-xs font-play"This site is for educational purposes, we are not held reliable for any outcome.>
           </p>
         </div>
       </div>
