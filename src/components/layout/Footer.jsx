@@ -5,7 +5,6 @@ export default function Footer() {
   const [globalVisits, setGlobalVisits] = useState(null);
 
   useEffect(() => {
-    // We fetch from the internal path we just created
     fetch("/api/get-count")
       .then((res) => res.json())
       .then((data) => {
@@ -20,25 +19,36 @@ export default function Footer() {
     <footer className="bg-navy-dark border-t border-navy-light/20 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          
           <div className="flex items-center gap-2">
             <Scale className="w-5 h-5 text-gold" />
-            <span className="font-display text-lg font-bold text-gold">Law4Teen.org</span>
+            <span className="font-display text-lg font-bold text-gold">
+              Law4Teen.org
+            </span>
           </div>
 
           <p className="text-gold-light/50 text-sm font-play">
             {globalVisits !== null ? (
-              <>Global Visitors: <span className="text-gold font-bold">{globalVisits.toLocaleString()}</span></>
+              <>
+                Global Visitors:{" "}
+                <span className="text-gold font-bold">
+                  {globalVisits.toLocaleString()}
+                </span>
+              </>
             ) : (
               "Empowering teens through legal literacy"
             )}
           </p>
 
-          <p className="text-gold-light/40 text-xs font-play">
-            &copy; {new Date().getFullYear()} Law4Teen. All rights reserved.
-            <br></br>
-          <p className="text-gold-light/40 text-xs font-play">
-            This site is for educational purposes, we are not held reliable for any outcome.
-          </p>
+          <div className="text-gold-light/40 text-xs font-play text-center">
+            <p>
+              &copy; {new Date().getFullYear()} Law4Teen. All rights reserved.
+            </p>
+            <p>
+              This site is for educational purposes, we are not held liable for any outcome.
+            </p>
+          </div>
+
         </div>
       </div>
     </footer>
